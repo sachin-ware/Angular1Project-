@@ -1,0 +1,19 @@
+<div class="row">
+    <h1>test</h1>
+    <div class="col-lg-6" ng-repeat="rolem in All_Data_menu">
+        <label >
+           <input type="checkbox"  value="{{rolem.AMM_MENU_ID}}" ng-checked="{{rolem.isSelected}}" ng-click="showChilds(rolem);"/>  {{rolem.AMM_MENU_NAME}} <br/>
+        </label>
+        
+             <div  class="gp-subcheckbox"  ng-repeat="sub in rolem.uisubmenus" >
+<!--                 {{sub}}-->
+<input type="checkbox"  ng-model="hasChecked"  ng-checked="{{sub.checked}}" ng-click="checkClick()" ng-change="Menu_Dtls_Checkbox(sub,rolem.AMM_MENU_ID,hasChecked)" />  {{sub.menuname}} <br/>
+
+           </div>
+
+    </div>
+    
+    <Button class="btn-primary" ng-click="submit()">Click me</Button>
+</div>
+
+                     

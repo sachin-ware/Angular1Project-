@@ -1,0 +1,47 @@
+<DIV class="row">
+    <DIV class="col-lg-6"><H3>User List:</h3>  </DIV>
+    <DIV class="col-lg-6">
+        <button type="button" class="btn btn-danger btn-circle btn-xl  pull-right" ng-click="navigateToCreateUser()"><i class="glyphicon glyphicon-plus"></i></button>
+    </DIV>
+</DIV>
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>DOB</th>
+      <th>User Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr ng-repeat="user in userData">
+        <th scope="row">{{user.userId}}</th>
+        <td>{{user.fname}}</td>
+        <td>{{user.lname}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.dob| date : 'dd/MM/yyyy'}}</td>
+        <td>{{user.userName}}</td>
+        <td>
+            <div class="ui right floated main menu">
+                <a class="bug popup icon item" data-content="Edit This Page"  data-tooltip="Edit User" ng-click="editUser(user)">
+                  <i class="edit icon"></i>
+                </a>
+
+                <a class="bug popup icon item" data-content="Submit Bug Report" data-tooltip="View User" ng-click="viewUser(user)">
+                  <i class="eye icon"></i>
+                </a>
+
+                <a class="github popup icon item" data-content="View project on GitHub"  data-tooltip="Delete User" ng-click="deleteUser(user)">
+                  <i class="delete icon"></i>
+                </a>
+            </div>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+

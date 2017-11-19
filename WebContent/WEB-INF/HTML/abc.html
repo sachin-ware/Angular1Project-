@@ -1,0 +1,315 @@
+<div class="container user_mk">
+
+ 
+
+ 
+
+<img src="images/gp-back-button.png" class="gp-back-btn" ng-click="go_back()">
+
+  <h3>Role to Menu Mapping</h3>
+
+ 
+
+ 
+
+  <div class="box-body box box-default" style=" height: auto;">
+
+  <div class="row">
+
+  <form name="roletomenumapping">
+
+ <div class="form-group all_form" ng-hide="new_record1">
+
+  <label>Role Name<span class="mandatory">*</span></label>
+
+  <select class="form-control select2"
+
+ng-model="roletmm.rolename" ng-change="changeRolename(roletmm.rolename);Role_Name_forID(roletmm.rolename)"
+
+ng-options = "rd.AMR_ROLE_NAME as rd.AMR_ROLE_NAME for rd in RoleData"
+
+required>
+
+  <option value="">Select Role Name</option>
+
+  </select>
+
+  </div> 
+
+ 
+
+ <div class="form-group all_form" ng-show="edit_record">
+
+  <label>Role Name<span class="mandatory">*</span></label>
+
+ 
+
+ 
+
+ <input type="text" class="form-control"
+
+placeholder="Role Name" readonly style="background-color: #fff;"
+
+  ng-model="roleName" >
+
+  </div> 
+
+ 
+
+ </div> 
+
+ 
+
+ 
+
+ <div class="form-group all_form" ng-show="roleDelete">
+
+  <label>Select Menu<span class="mandatory">*</span></label>
+
+  <div class="col-md-12">
+
+  <div class="row">
+
+ <div class="col-lg-6" ng-repeat="rolem in data_menu">
+
+  <label >
+
+ <input type="checkbox" value="{{rolem.AMM_MENU_ID}}" ng-click="showChilds(rolem);" ng-checked="{{rolem.isSelected}}"/>
+
+{{rolem.AMM_MENU_NAME}} <br/>
+
+ </label>
+
+ <div class="gp-subcheckbox" ng-show="rolem.active" ng-repeat="sub in rolem.submenus" >
+
+ <input type="checkbox" ng-model="hasChecked" ng-checked="{{rolem.isSelected}}"
+
+ng-change="Menu_Dtls_Checkbox_Edit(sub,rolem.AMM_MENU_ID,hasChecked)" /> {{sub}} {{rolem.isSelected}} <br/>
+
+ </div>
+
+  </div>
+
+ 
+
+  </div>
+
+ 
+
+ 
+
+ 
+
+ </div>  
+
+ 
+
+ 
+
+ 
+
+ <!-- <span class="Fielderror" ng-show="roletomenumapping.roletmm.RoleName.$dirty && roletomenumapping.roletmm.RoleName.$invalid">Select Role Name</span> -->
+
+  </div> 
+
+ <div class="form-group all_form" ng-hide="roleDelete" style=" height: 300px; overflow-y: scroll; width: 98%;">
+
+ <label>Menus<span class="mandatory">*</span></label><br>
+
+  <div class="col-md-12">
+
+  <div class="row">
+
+ <div class="col-lg-6" ng-repeat="rolem in RoleDataMenu">
+
+  <label >
+
+ <input type="checkbox" value="{{rolem.AMM_MENU_ID}}" ng-click="showChilds(rolem);"/> {{rolem.AMM_MENU_NAME}} <br/>
+
+ </label>
+
+ <div class="gp-subcheckbox" ng-show="rolem.active" ng-repeat="sub in rolem.submenus" >
+
+ <input type="checkbox" ng-model="hasChecked" ng-change="Menu_Dtls_Checkbox(sub,rolem.AMM_MENU_ID,hasChecked)" /> {{sub}} <br/>
+
+ </div>
+
+  </div>
+
+ 
+
+  <!-- <div class="col-lg-6" ng-repeat="item in items">
+
+<label >
+
+<input type="checkbox" ng-click="showChilds(item)"/> {{item.name}} <br/>
+
+</label>
+
+<div ng-repeat="subItem in item.subItems" ng-show="item.active" " >
+
+<input type="checkbox" ng-click="Itemmenu(subItem.submenuid,item.menuid)" /> ---{{subItem.name}} <br/>
+
+</div>
+
+</div> -->
+
+ 
+
+ 
+
+  </div>
+
+ 
+
+ 
+
+ 
+
+ </div>  
+
+ 
+
+ 
+
+ 
+
+ <!-- <label ng-repeat="rolem in RoleDataMenu">
+
+ 
+
+ 
+
+<input type="checkbox" ng-model="roletmm.menu_selected" checklist-value=""> {{rolem.AMM_MENU_NAME}}
+
+<input type="checkbox" value="{{rolem.AMM_MENU_ID}}" ng-click="toggleCheck(rolem.AMM_MENU_ID)"/> {{rolem.AMM_MENU_NAME}} <br/>
+
+<input type="checkbox" ng-model="checkItem[{{rolem.AMM_MENU_ID}}]" /> {{rolem.AMM_MENU_NAME}}
+
+</label>
+
+-->
+
+ 
+
+ 
+
+ </div>  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ <div class="form-group all_form"> 
+
+ <label>Comments<span class="mandatory">*</span></label><br>
+
+  <textarea placeholder=" Enter..." style="width: 100%;" ng-pattern="/^[\w -]*$/ " name="remarks" ng-model="roletmm.roletomenucomments" required></textarea>
+
+  <!-- <textarea class=" form-control" placeholder="Enter Comments..." name="roletomenucomments"
+
+style="width: 100%;" maxlength="100" ng-model="roletmm.roletomenucomments" ng-pattern="/^[\w -]*$/" required ></textarea> -->
+
+  <span class="Fielderror" ng-show="roletomenumapping.roletomenucomments.$error.pattern">Please enter only alphanumeric values</span>
+
+  </div>
+
+ 
+
+ <div class=" pull-right" style="margin-right:20px;" ng-hide="new_record1">
+
+  <button type="button" class="btn red_button" data-toggle="modal" ng-click="ActiontoService(roletmm,'Save as draft')" ng-disabled="!roletmm.roletomenucomments || !roletmm.rolename">Save As Draft</button>
+
+  <button type="button" class="btn red_button" data-toggle="modal" ng-click="ActiontoService(roletmm,'Submit')" ng-disabled="!roletmm.roletomenucomments || !roletmm.rolename">Send For Approval</button>
+
+  <!-- <button type="button" class="btn red_button" data-toggle="modal" ng-show="roleDelete" ng-click="ActiontoService(roletmm,'delete')" ng-disabled="roletomenumapping.$invalid">Delete</button> -->
+
+  </div>
+
+ 
+
+ <div class=" pull-right" style="margin-right:20px;"  ng-show="edit_record">
+
+  <button type="button" class="btn red_button" data-toggle="modal" ng-click="ActiontoService(roletmm,'Save as draft')" ng-disabled="!roletmm.roletomenucomments || !roleName">Save As Draft</button>
+
+  <button type="button" class="btn red_button" data-toggle="modal" ng-click="ActiontoService(roletmm,'Submit')" ng-disabled="!roletmm.roletomenucomments || !roleName">Send For Approval</button>
+
+  <!-- <button type="button" class="btn red_button" data-toggle="modal" ng-show="roleDelete" ng-click="ActiontoService(roletmm,'delete')" ng-disabled="roletomenumapping.$invalid">Delete</button> -->
+
+  </div>
+
+ 
+
+ </form>
+
+ </div>
+
+ 
+
+ 
+
+ </div>
+
+ 
+
+ 
+
+ </div>  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+<div class="modal fade" id="confirm_delete_modal1" role="dialog" data-backdrop="static">
+
+  <div class="modal-dialog">
+
+ 
+
+ <!-- Modal content-->
+
+  <div class="modal-content" style="position: fixed;top: 50%;left: 25%;width: 380px;">
+
+  <div class="modal-header" style="background-color:#ed1c24">
+
+Confirmation
+
+  <!-- <button type="button" class="close" data-dismiss="modal" ng-click="okCloseNavModal()">&times;</button> -->
+
+  <h4 class="modal-title"></h4>
+
+  </div>
+
+  <div class="modal-body">
+
+ 
+
+ <p style="margin-left:5px;margin-top:20px;">Are you sure you want to {{messageText}}</p>
+
+  <div style="padding-left: 150px; position: relative;">
+
+ <button type="button" class="btn btn-default" style=" margin-left: 68px;"  data-dismiss="modal" ng-click="processRoleMenuMapping();" >Yes</button>
+
+  <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close();" style="float: right;margin-bottom:20px; margin-right:20px;">No</button>
+
+  </div>
+
+  </div>
+
+  </div>
+
+ 
+
+ </div>
+
+  </div>

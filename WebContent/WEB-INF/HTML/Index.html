@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>AngularApp
+</title>
+<script type="text/javascript" src="../static/app/bower_components/jquery/dist/jquery.min.js"text/javascript" src="../static/app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../static/app/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<script type="text/javascript" src="../node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="../JS/tmpApp.js"></script>
+<script type="text/javascript" src="../JS/HomeController.js"></script>
+<script type="text/javascript" src="../JS/ParentController.js"></script>
+<script type="text/javascript" src="../JS/ChildController.js"></script>
+</head>
+<body>
+	<header>
+		<div class="jumbotron">
+			<h5>Sample Header</h5>
+		</div>
+	</header>
+
+<div ng-app="TestApp"> 
+	<div ng-controller="HomeController as hc">
+			<table>
+				<tr>
+					<th>Roll Name</th>
+					<th>Menus</th>
+				</tr>
+				<tbody>
+					<tr ng-repeat="roll in filteredArray" style="Border:1px solid black">
+						<td style="Border:1px solid black">{{roll.rollName}}</td>
+						<td >
+							<table ng-repeat="menu in roll.menus ">
+								<tr  >
+									<td>{{menu}}</td>
+								</tr>
+							</table>
+						</td>
+						
+					</tr>
+				</tbody>
+				
+			</table>
+	</div>
+	<hr>
+	<div ng-controller="ParentController">
+			Parent:{{ctrlName}}
+			<div ng-controller="ChildController">
+				CHild:{{ctrlName}}
+				<button ng-click="sayHello()">Click me</button>
+			</div>
+			
+		
+	</div>
+
+
+</div>
+
+
+<footer>
+	Test Footer		
+</footer>
+
+</body>
+</html>
