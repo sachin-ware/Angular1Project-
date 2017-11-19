@@ -1,5 +1,4 @@
-WebContent/WEB-INF/bower_components
-
+/WebContent/WEB-INF/bower_components
 /build
 /nbproject
 /WebContent/WEB-INF/nbproject
