@@ -35,7 +35,7 @@ var MyApp = angular.module("TestApp", ['ngRoute'])
                 $routeProvider.when('/user/view', {
                   //  template:'<Strong>This is user html.</Strong>',
           
-                    templateUrl:'HTML/priyanka.html',
+                    templateUrl:'HTML/TestPage.html',
                     controller: 'sidebarController'
                 });
                 

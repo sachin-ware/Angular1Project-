@@ -1,8 +1,8 @@
 MyApp.controller("UserController",['$scope','$http','$location','userService','sharedDataService',
-    function($scope,$http,$location,userService,sharedDataService) {
+    function($scope,$h,$location,userService,sharedDataService) {
 			console.log("UserController  loaded successfully");
                         url="http://localhost:8082/users"
-			$http.get(url).then(handleSuccess, handleError('Error getting menu entry.'));
+			$h.get(url).then(handleSuccess, handleError('Error getting menu entry.'));
                         
                         $scope.userData={};
                         $scope.user={};
