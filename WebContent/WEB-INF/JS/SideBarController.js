@@ -11,6 +11,8 @@ MyApp.controller("sidebarController",['$scope','$location',
                                             innerName:"inner Sachin"
                                         }
 			};
+			
+			console.log("Test Log");
                         
                         $scope.obj2={
 					name:"Sachin",
